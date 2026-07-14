@@ -35,6 +35,10 @@ export const ContactList = () => {
     setContacts((prev) => prev.filter((c) => c.id !== deletedId));
   };
 
+  const handleContactUpdated = (updated) => {
+    setContacts((prev) => prev.map((c) => (c.id === updated.id ? updated : c)));
+  };
+
   if (loading) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3">
@@ -52,7 +56,12 @@ export const ContactList = () => {
         </div>
       ) : (
         contacts.map((contact) => (
-          <ContactCard key={contact.id} {...contact} onDeleteSuccess={handleContactDeleted} />
+          <ContactCard
+            key={contact.id}
+            contact={contact}
+            onDeleteSuccess={handleContactDeleted}
+            onUpdateSuccess={handleContactUpdated}
+          />
         ))
       )}
 
