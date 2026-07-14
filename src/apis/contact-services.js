@@ -1,9 +1,13 @@
 import { Rss } from "lucide-react";
 import { BASE_URL } from "../utils/api-client";
 
-export const getContacts = async () => {
+export const getContacts = async (searchTerm = "") => {
   try {
-    const res = await fetch(`${BASE_URL}/contact`);
+    const url = searchTerm
+      ? `${BASE_URL}/contact?name=${encodeURIComponent(searchTerm)}`
+      : `${BASE_URL}/contact`;
+
+    const res = await fetch(url);
 
     if (!res.ok) {
       throw new Error(`Failed to fetch contacts (status: ${res.status})`);
@@ -15,6 +19,7 @@ export const getContacts = async () => {
     throw new Error(err.message || "Something went wrong while fetching contacts");
   }
 };
+
 
 export const createContact = async (contact) => {
   try {
