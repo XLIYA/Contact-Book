@@ -1,8 +1,10 @@
 // src/components/contact-card.jsx
 
 import { Star, Phone } from "lucide-react";
+import { DeleteContactModal } from "./contact-form/delete-contact";
 
-export const ContactCard = ({ name, phone, job, favorite, avatar }) => {
+
+export const ContactCard = ({ id, name, phone, job, favorite, avatar, onDeleteSuccess }) => {
     return (
         <div className="group relative flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md sm:p-5">
 
@@ -36,6 +38,8 @@ export const ContactCard = ({ name, phone, job, favorite, avatar }) => {
                     {phone}
                 </p>
             </div>
+
+            <DeleteContactModal id={id} name={name} onSuccess={onDeleteSuccess} />
         </div>
     );
 };

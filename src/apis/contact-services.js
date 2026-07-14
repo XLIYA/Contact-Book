@@ -35,3 +35,20 @@ export const createContact = async (contact) => {
     throw new Error(err.message || "Something went wrong while creating the contact");
   }
 };
+
+export const deleteContact = async (id) => {
+  try {
+    const res = await fetch(`${BASE_URL}/contact/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to delete contact (status: ${res.status})`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    throw new Error(err.message || "Something went wrong while deleting the contact");
+  }
+}
