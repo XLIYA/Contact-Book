@@ -1,3 +1,5 @@
+// src/components/contact-list/contact-list.jsx
+
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { ContactCard } from "../contact-card";
@@ -29,6 +31,10 @@ export const ContactList = () => {
     setContacts((prev) => [...prev, newContact]);
   };
 
+  const handleContactDeleted = (deletedId) => {
+    setContacts((prev) => prev.filter((c) => c.id !== deletedId));
+  };
+
   if (loading) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3">
@@ -45,7 +51,9 @@ export const ContactList = () => {
           <p className="text-stone-500">No contacts found.</p>
         </div>
       ) : (
-        contacts.map((contact) => <ContactCard key={contact.id} {...contact} />)
+        contacts.map((contact) => (
+          <ContactCard key={contact.id} {...contact} onDeleteSuccess={handleContactDeleted} />
+        ))
       )}
 
       <AddContactModal onSuccess={handleContactAdded} />
