@@ -1,9 +1,8 @@
-// src/components/contact-list/contact-list.jsx
-
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { ContactCard } from "../contact-card";
 import { Spinner } from "../ui/spinner";
+import { AddContactModal } from "../contact-form/add-contact-modal";
 import { getContacts } from "../../apis/contact-services";
 
 export const ContactList = () => {
@@ -26,6 +25,10 @@ export const ContactList = () => {
     fetchContacts();
   }, []);
 
+  const handleContactAdded = (newContact) => {
+    setContacts((prev) => [...prev, newContact]);
+  };
+
   if (loading) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3">
@@ -35,19 +38,17 @@ export const ContactList = () => {
     );
   }
 
-  if (contacts.length === 0) {
-    return (
-      <div className="flex min-h-[40vh] items-center justify-center">
-        <p className="text-stone-500">No contacts found.</p>
-      </div>
-    );
-  }
-
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-3 p-4">
-      {contacts.map((contact) => (
-        <ContactCard key={contact.id} {...contact} />
-      ))}
+      {contacts.length === 0 ? (
+        <div className="flex min-h-[40vh] items-center justify-center">
+          <p className="text-stone-500">No contacts found.</p>
+        </div>
+      ) : (
+        contacts.map((contact) => <ContactCard key={contact.id} {...contact} />)
+      )}
+
+      <AddContactModal onSuccess={handleContactAdded} />
     </div>
   );
 };
