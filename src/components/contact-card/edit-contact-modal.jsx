@@ -18,7 +18,6 @@ export const EditContactModal = ({ contact, onSuccess }) => {
   const [formError, setFormError] = useState(initialErrors);
   const [submitting, setSubmitting] = useState(false);
 
-  // هر بار که مدال باز می‌شه، فرم رو با آخرین اطلاعات مخاطب پر کن
   useEffect(() => {
     if (isOpen) {
       setForm(contact);

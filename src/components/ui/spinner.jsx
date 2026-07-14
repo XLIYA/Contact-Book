@@ -1,5 +1,3 @@
-// src/components/ui/spinner.jsx
-
 const sizeClasses = {
   sm: "h-3 w-3",
   md: "h-5 w-5",
