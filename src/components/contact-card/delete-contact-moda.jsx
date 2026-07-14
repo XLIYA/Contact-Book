@@ -1,5 +1,3 @@
-// src/components/contact-card/delete-contact-modal.jsx
-
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
 import toast from "react-hot-toast";

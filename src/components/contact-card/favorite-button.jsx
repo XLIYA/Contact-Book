@@ -1,5 +1,3 @@
-// src/components/contact-card/favorite-button.jsx
-
 import { useState } from "react";
 import { Star } from "lucide-react";
 import toast from "react-hot-toast";
@@ -8,7 +6,8 @@ import { updateContact } from "../../apis/contact-services";
 export const FavoriteButton = ({ contact, onSuccess }) => {
   const [updating, setUpdating] = useState(false);
 
-  const handleToggle = async () => {
+  const handleToggle = async (e) => {
+    e.stopPropagation();
     if (updating) return;
 
     try {
@@ -33,9 +32,8 @@ export const FavoriteButton = ({ contact, onSuccess }) => {
       className="absolute right-3 top-3 text-stone-300 transition-colors hover:text-amber-400 disabled:cursor-not-allowed"
     >
       <Star
-        className={`h-5 w-5 drop-shadow-sm ${
-          contact.favorite ? "fill-amber-400 text-amber-400" : "fill-none"
-        }`}
+        className={`h-5 w-5 drop-shadow-sm ${contact.favorite ? "fill-amber-400 text-amber-400" : "fill-none"
+          }`}
       />
     </button>
   );

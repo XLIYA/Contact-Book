@@ -1,4 +1,3 @@
-import { Rss } from "lucide-react";
 import { BASE_URL } from "../utils/api-client";
 
 export const getContacts = async (searchTerm = "") => {
